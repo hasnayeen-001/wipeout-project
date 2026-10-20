@@ -26,7 +26,6 @@ This project is built upon the divine promise in the Holy Qur'an:
 > *"Indeed, good deeds wipe out bad ones. That is a reminder for those who remember."*  
 > — **Surah Hud (11:114)**
 
----
 
 ## 📜 Islamic Principles & Etiquette
 
@@ -45,7 +44,6 @@ Counting shortfalls should never lead to despair in Allah's mercy. The purpose o
 > *"Say, 'O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.'""*  
 > — **Surah Az-Zumar (39:53)**
 
----
 
 ## 🚀 How to Use
 
@@ -56,7 +54,6 @@ Counting shortfalls should never lead to despair in Allah's mercy. The purpose o
    - **Target Amounts:** Assign the total target for each item (max 20,000 units per item).
 3. **Generate & Print:** Click **Generate Preview & Printable Sheets**, then click **🖨️ Print This Document**.
 
----
 
 ## ✨ Features
 
@@ -64,7 +61,6 @@ Counting shortfalls should never lead to despair in Allah's mercy. The purpose o
 - **Yearly Quote Header:** Displays Umar ibn al-Khattab's famous reminder on accountability at the top of every new year section.
 - **Exact 15-Column Print Layout:** Designed specifically for standard A4 portrait printing with crisp, high-contrast black-and-white styling.
 
----
 
 ## 🖨️ Recommended Print Settings
 
@@ -74,15 +70,13 @@ For optimal print results on standard paper:
 - **Scale:** 100%
 - **Background Graphics:** **Enabled / Checked** *(preserves quote boxes and crisp borders)*
 
----
 
 ## 🔒 Privacy & Safety
 
 - **No Tracking:** No analytics, cookies, or database connections.
 - **100% Offline Compatible:** Once you downloaded [`index.html`](https://github.com/hasnayeen-001/wipeout-project/blob/main/index.html), you can disconnect your internet completely and the tool will continue to work perfectly.
 
----
 
 ## 🤲 Du'a & Acknowledgments
 
-May Allah (SWT) accept your good deeds, purify your heart, turn your bad deeds into good ones, and grant us all success on the Day when our deeds are weighed.
+May Allah (SWT) accept your good deeds, purify your heart, and grant us all success on the Day when our deeds are weighed.
