@@ -11,7 +11,7 @@
 👉 **https://hasnayeen-001.github.io/wipeout-project/**
 
 **Offline Version (100% Private):**  
-1. Download the `index.html` file from this page.  
+1. Download the [`index.html`](https://your-username.github.io/wipeout-project/) file from this page.  
 2. Open it with any web browser (Chrome, Safari, Edge, or Firefox).  
 3. You can turn off your internet completely before using it.
 
@@ -79,7 +79,7 @@ For optimal print results on standard paper:
 ## 🔒 Privacy & Safety
 
 - **No Tracking:** No analytics, cookies, or database connections.
-- **100% Offline Compatible:** Once you downloaded `index.html`, you can disconnect your internet completely and the tool will continue to work perfectly.
+- **100% Offline Compatible:** Once you downloaded [`index.html`](https://your-username.github.io/wipeout-project/), you can disconnect your internet completely and the tool will continue to work perfectly.
 
 ---
 
