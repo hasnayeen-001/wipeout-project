@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wipeout Project — Personal Muhasabah</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #111111;
+            --border-color: #222222;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .no-print {
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            background: #f9f9f9;
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: #111;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button.btn-primary {
+            background-color: #111;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        button.btn-primary:hover {
+            background-color: #333;
+        }
+
+        .action-bar-print {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #eef6ff;
+            border: 1px solid #b6d4fe;
+            border-radius: 6px;
+        }
+
+        .btn-print-trigger {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn-print-trigger:hover {
+            background-color: #0b5ed7;
+        }
+
+        #task-inputs-container {
+            margin-top: 15px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        .task-input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .task-input-row span {
+            font-weight: bold;
+            font-size: 0.9rem;
+            min-width: 120px;
+        }
+
+        /* Printable Container with Safe Margins */
+        .print-container {
+            width: 100%;
+            max-width: 190mm;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        /* Force new page for each new year section */
+        .year-container.page-start {
+            page-break-before: always;
+            break-before: page;
+        }
+
+        .year-section-header {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .year-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+        }
+
+        .umar-quote-box {
+            background-color: #f4f4f4;
+            border-left: 4px solid #111;
+            padding: 10px 14px;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #111;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Chunked Grid Cards */
+        .grid-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            box-sizing: border-box;
+            width: 100%;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px dotted #666;
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .card-meta {
+            font-size: 0.78rem;
+            color: #333;
+        }
+
+        /* 15-Column Responsive Grid */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(15, 1fr);
+            gap: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            container-type: inline-size;
+        }
+
+        /* Scalable Font for 5-Digit Numbers */
+        .checkbox-item {
+            aspect-ratio: 1 / 1;
+            border: 1px solid #222;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(6.5px, 2.3cqw, 8.5px);
+            font-weight: 600;
+            color: #000;
+            background-color: #fff;
+            box-sizing: border-box;
+            width: 100%;
+            overflow: hidden;
+            line-height: 1;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page-footer-note {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #444;
+            margin-top: 6px;
+            font-style: italic;
+            border-top: 1px dashed #ddd;
+            padding-top: 4px;
+        }
+
+        /* Print Media Styles & Margin Protection */
+        @page {
+            size: A4 portrait;
+            margin: 12mm;
+        }
+
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+                padding: 0;
+                margin: 0;
+            }
+            .no-print, .action-bar-print {
+                display: none !important;
+            }
+            .print-container {
+                max-width: 100%;
+                padding: 0;
+            }
+            .grid-card {
+                border: 1px solid #000 !important;
+                margin-bottom: 12px;
+            }
+            .umar-quote-box {
+                background-color: #f4f4f4 !important;
+                border-left: 4px solid #000 !important;
+            }
+            .checkbox-item {
+                border-color: #000 !important;
+                color: #000 !important;
+            }
+            .page-start {
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Controls Form (Hidden on Print) -->
+    <div class="no-print">
+        <h1>The Wipeout Project — Personal Muhasabah</h1>
+        <div class="subtitle">Concealed Personal Accounting (Sitr) & Good Deed Redemption</div>
+        
+        <div class="form-group">
+            <label for="start-year">Start Year (1900 – 2300):</label>
+            <input type="number" id="start-year" value="2017" min="1900" max="2300">
+        </div>
+
+        <div class="form-group">
+            <label for="end-year">End Year (1900 – 2300):</label>
+            <input type="number" id="end-year" value="2026" min="1900" max="2300">
+        </div>
+
+        <div class="form-group">
+            <label for="num-tasks">Number of Items / Sins to Purify (1 – 20):</label>
+            <input type="number" id="num-tasks" value="3" min="1" max="20" onchange="generateTaskInputs()">
+        </div>
+
+        <div id="task-inputs-container"></div>
+
+        <button class="btn-primary" onclick="generateTracker()">Generate Preview & Printable Sheets</button>
+    </div>
+
+    <!-- Manual Print Trigger Button -->
+    <div id="action-bar" class="action-bar-print" style="display: none;">
+        <button class="btn-print-trigger" onclick="window.print()">🖨️ Print This Document</button>
+        <div style="font-size: 0.85rem; color: #555; margin-top: 5px;">Make sure your printer background graphics option is enabled for best results.</div>
+    </div>
+
+    <!-- Printable Area -->
+    <div id="print-area" class="print-container"></div>
+
+    <script>
+        function generateTaskInputs() {
+            let count = parseInt(document.getElementById('num-tasks').value) || 1;
+            if (count < 1) count = 1;
+            if (count > 20) count = 20;
+            document.getElementById('num-tasks').value = count;
+
+            const container = document.getElementById('task-inputs-container');
+            container.innerHTML = '<strong>Assign Target Amount per Purification Item (Max: 20,000):</strong><br><br>';
+
+            for (let i = 1; i <= count; i++) {
+                const labelName = `Purification ${String(i).padStart(2, '0')}`;
+                const row = document.createElement('div');
+                row.className = 'task-input-row';
+                row.innerHTML = `
+                    <span>${labelName}</span>
+                    <input type="number" id="task-target-${i}" value="1000" min="1" max="20000" placeholder="Target Amount (Max 20,000)" style="flex: 1;">
+                `;
+                container.appendChild(row);
+            }
+        }
+
+        window.onload = function() {
+            generateTaskInputs();
+        };
+
+        function generateTracker() {
+            const startYear = parseInt(document.getElementById('start-year').value);
+            const endYear = parseInt(document.getElementById('end-year').value);
+            const numTasks = parseInt(document.getElementById('num-tasks').value);
+            const printArea = document.getElementById('print-area');
+            const actionBar = document.getElementById('action-bar');
+
+            // 1. Year Validation
+            if (isNaN(startYear) || startYear < 1900 || startYear > 2300) {
+                alert("Please enter a valid Start Year between 1900 and 2300.");
+                return;
+            }
+            if (isNaN(endYear) || endYear < 1900 || endYear > 2300) {
+                alert("Please enter a valid End Year between 1900 and 2300.");
+                return;
+            }
+            if (startYear > endYear) {
+                alert("Start Year cannot be later than End Year.");
+                return;
+            }
+
+            // 2. Target Amount Validation
+            let taskProgress = {};
+            for (let i = 1; i <= numTasks; i++) {
+                const targetInput = document.getElementById(`task-target-${i}`);
+                let totalTarget = parseInt(targetInput ? targetInput.value : 1000);
+
+                if (isNaN(totalTarget) || totalTarget < 1) {
+                    alert(`Purification ${String(i).padStart(2, '0')} must have a target of at least 1.`);
+                    return;
+                }
+                if (totalTarget > 20000) {
+                    alert(`Purification ${String(i).padStart(2, '0')} target cannot exceed 20,000.`);
+                    return;
+                }
+
+                taskProgress[i] = {
+                    totalTarget: totalTarget,
+                    remainingTarget: totalTarget,
+                    currentCounter: 1
+                };
+            }
+
+            const totalYears = (endYear - startYear) + 1;
+            printArea.innerHTML = '';
+
+            const MAX_BOXES_PER_CARD = 150; 
+            let renderedYearsCount = 0;
+
+            for (let y = 0; y < totalYears; y++) {
+                const currentYear = startYear + y;
+                const yearsLeft = totalYears - y;
+
+                const yearSection = document.createElement('div');
+                yearSection.className = 'year-container';
+
+                // Force new page for year 2, year 3, etc.
+                if (renderedYearsCount > 0) {
+                    yearSection.classList.add('page-start');
+                }
+
+                const yearHeaderHTML = `
+                    <div class="year-section-header">
+                        <div class="year-title">Year ${currentYear}</div>
+                        <div class="umar-quote-box">
+                            &ldquo;Hold yourselves accountable before you are held accountable, and weigh your deeds before they are weighed for you. For indeed, it will be easier for your accounting tomorrow if you hold yourselves accountable today.&rdquo; &mdash; Umar ibn al-Khattab (RA)
+                        </div>
+                    </div>
+                `;
+                yearSection.innerHTML = yearHeaderHTML;
+
+                let yearHasTasks = false;
+
+                for (let i = 1; i <= numTasks; i++) {
+                    const taskName = `Purification ${String(i).padStart(2, '0')}`;
+                    const p = taskProgress[i];
+
+                    if (p.remainingTarget <= 0) continue;
+
+                    const yearTarget = Math.ceil(p.remainingTarget / yearsLeft);
+                    const actualCount = Math.min(yearTarget, p.remainingTarget);
+
+                    if (actualCount <= 0) continue;
+                    yearHasTasks = true;
+
+                    let itemsRendered = 0;
+                    let partCounter = 1;
+                    const totalParts = Math.ceil(actualCount / MAX_BOXES_PER_CARD);
+
+                    while (itemsRendered < actualCount) {
+                        const chunkSize = Math.min(MAX_BOXES_PER_CARD, actualCount - itemsRendered);
+                        const startIdx = p.currentCounter;
+                        const endIdx = p.currentCounter + chunkSize - 1;
+
+                        const card = document.createElement('div');
+                        card.className = 'grid-card';
+
+                        const partLabel = totalParts > 1 ? ` [Part ${partCounter}/${totalParts}]` : '';
+
+                        const cardHeaderHTML = `
+                            <div class="card-header">
+                                <span class="card-title">${taskName}${partLabel}</span>
+                                <span class="card-meta">Year ${currentYear} | Items #${startIdx} &ndash; #${endIdx} (Chunk: ${chunkSize} / Year Target: ${actualCount})</span>
+                            </div>
+                        `;
+
+                        let gridHTML = '<div class="checkbox-grid">';
+                        for (let c = 0; c < chunkSize; c++) {
+                            gridHTML += `<div class="checkbox-item">${startIdx + c}</div>`;
+                        }
+                        gridHTML += '</div>';
+
+                        const footerHTML = `
+                            <div class="page-footer-note">
+                                &ldquo;Indeed, good deeds wipe out bad ones.&rdquo; &mdash; Surah Hud 11:114
+                            </div>
+                        `;
+
+                        card.innerHTML = cardHeaderHTML + gridHTML + footerHTML;
+                        yearSection.appendChild(card);
+
+                        p.currentCounter += chunkSize;
+                        p.remainingTarget -= chunkSize;
+                        itemsRendered += chunkSize;
+                        partCounter++;
+                    }
+                }
+
+                if (yearHasTasks) {
+                    printArea.appendChild(yearSection);
+                    renderedYearsCount++;
+                }
+            }
+
+            actionBar.style.display = 'block';
+            actionBar.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
