@@ -7,10 +7,10 @@
 
 ## 🔒 How to use this tool
 
-- **Online Version:**  
+**1. Online Version:**  
 👉 **https://hasnayeen-001.github.io/wipeout-project/**
 
-- **Offline Version (100% Private):**  
+**2. Offline Version (100% Private):**  
 1. Download the [`index.html`](https://github.com/hasnayeen-001/wipeout-project/blob/main/index.html) file from this page.  
 2. Open it with any web browser (Chrome, Safari, Edge, or Firefox).  
 3. You can turn off your internet completely before using it.
