@@ -32,7 +32,7 @@ This project is built upon the divine promise in the Holy Qur'an:
 When using this tool for personal accounting, users are strongly advised to adhere to the core Islamic principles of repentance:
 
 ### 1. Complete Secrecy (*Sitr*)
-If a shortfall or sin is **strictly personal between you and Allah** and does not harm or affect anyone else, Islam strongly encourages keeping it concealed while performing sincere repentance (*Tawbah*) and good deeds.
+If a shortfall or sin is **strictly personal between you and Allah** and **does not harm or affect anyone else**, Islam strongly encourages keeping it concealed while performing sincere repentance (*Tawbah*) and good deeds.
 
 * **How this app protects your privacy:**
   * **Zero Cloud Storage / Client-Side Only:** All calculations run entirely inside your local browser memory. No data is saved, tracked, or sent to any server.
