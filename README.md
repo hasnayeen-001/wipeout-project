@@ -41,7 +41,7 @@ If a shortfall or sin is **strictly personal between you and Allah** and does no
 ### 2. Focus on Hope (*Raja'*)
 Counting shortfalls should never lead to despair in Allah's mercy. The purpose of *Muhasabah* is to motivate immediate repentance and energetic good action.
 
-> *"Say, 'O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.'""*  
+> *"Say, 'O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful."*  
 > — **Surah Az-Zumar (39:53)**
 
 
