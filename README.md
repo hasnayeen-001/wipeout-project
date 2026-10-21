@@ -5,7 +5,7 @@
 
 ---
 
-## 🔒 How to use this tool
+## 🔒 Quick Access
 
 **1. Online Version:**  
 👉 **https://hasnayeen-001.github.io/wipeout-project/**
