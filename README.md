@@ -64,14 +64,6 @@ Counting shortfalls should never lead to despair in Allah's mercy. The purpose o
 - **Exact 15-Column Print Layout:** Designed specifically for standard A4 portrait printing with crisp, high-contrast black-and-white styling.
 
 
-## 🖨️ Recommended Print Settings
-
-For optimal print results on standard paper:
-- **Paper Size:** A4 or US Letter (Portrait)
-- **Margins:** Default (or 10mm–12mm)
-- **Scale:** 100%
-- **Background Graphics:** **Enabled / Checked** *(preserves quote boxes and crisp borders)*
-
 
 ## 🔒 Privacy & Safety
 
