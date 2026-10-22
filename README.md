@@ -5,7 +5,7 @@
 
 ---
 
-## 🔒 Quick Access
+## 🔒 Quick Access (Read 📌About The Project section first before clicking the link)
 
 **1. Online Version:**  
 👉 **https://hasnayeen-001.github.io/wipeout-project/**
