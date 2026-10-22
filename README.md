@@ -7,7 +7,7 @@
 
 ## 🔒 Quick Access 
 
-(Read **[About The Project](https://github.com/hasnayeen-001/wipeout-project/blob/main/README.md#-about-the-project)** section and all other sections before clicking the link)
+(Before clicking the link, read **[About The Project](https://github.com/hasnayeen-001/wipeout-project/blob/main/README.md#-about-the-project)** section and all other sections given below carefully)
 
 **1. Online Version:**  
 👉 **https://hasnayeen-001.github.io/wipeout-project/**
