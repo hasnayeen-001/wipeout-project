@@ -21,7 +21,7 @@ Before clicking the link, read **[About The Project](https://github.com/hasnayee
 
 **The Wipeout Project** is a free, privacy-first, client-side web tool designed to help Muslims engage in structured self-accountability (*Muhasabah*) and good deed redemption (*Tawbah*). 
 
-The application generates clean, minimalist, high-contrast **printable checkbox sheets** tailored for long-term goal tracking (spanning years or decades). Each checked box represents **one completed act of Ibadah** (such as voluntary prayers, *Sadaqah*, *Istighfar*, or fasting) performed to build a mountain of good deeds and erase past shortfalls.
+The application generates clean, minimalist, high-contrast **printable checkbox sheets** tailored for long-term goal tracking (spanning years or decades). Each checked box represents **one completed act of Ibadah** (such as voluntary prayers (*Nafl Salah*), *Sadaqah*, *Istighfar*, or fasting) performed to build a mountain of good deeds and erase past shortfalls.
 
 This project is built upon the divine promise in the Holy Qur'an:
 
