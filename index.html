@@ -17,7 +17,7 @@
             color: var(--text-color);
             margin: 0;
             padding: 20px;
-            line-height: 1.45;
+            line-height: 1.4;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
@@ -125,7 +125,7 @@
             min-width: 120px;
         }
 
-        /* Printable Container with Safe Margins */
+        /* Printable Container */
         .print-container {
             width: 100%;
             max-width: 190mm;
@@ -133,60 +133,47 @@
             box-sizing: border-box;
         }
 
-        /* Opening Guide Styles */
-        .guide-page {
+        /* Intro Guide Page Formatting */
+        .intro-page {
             page-break-after: always;
             break-after: page;
-            padding: 5px 0 15px 0;
-            box-sizing: border-box;
+            padding: 10px 0;
         }
 
-        .guide-page h2 {
-            font-size: 1.25rem;
+        .intro-page h2 {
+            font-size: 1.2rem;
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 4px;
-            margin-top: 0;
+            margin-top: 10px;
             margin-bottom: 10px;
             text-transform: uppercase;
         }
 
-        .guide-page h3 {
-            font-size: 1rem;
-            margin-top: 14px;
-            margin-bottom: 6px;
-            color: #111;
-        }
-
-        .guide-page h4 {
-            font-size: 0.9rem;
-            margin-top: 10px;
+        .intro-page h3 {
+            font-size: 0.95rem;
+            margin-top: 12px;
             margin-bottom: 4px;
-            color: #222;
         }
 
-        .guide-page p, .guide-page li {
-            font-size: 0.85rem;
+        .intro-page p, .intro-page li {
+            font-size: 0.84rem;
             margin-bottom: 6px;
             text-align: justify;
             line-height: 1.4;
         }
 
-        .guide-page ul, .guide-page ol {
+        .intro-page ul {
             margin-top: 4px;
-            margin-bottom: 8px;
-            padding-left: 20px;
+            padding-left: 18px;
         }
 
         .quote-callout {
             background-color: #f4f4f4;
             border-left: 4px solid #111;
-            padding: 8px 12px;
+            padding: 6px 10px;
             font-style: italic;
-            font-size: 0.83rem;
-            margin: 10px 0;
-            line-height: 1.4;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
+            font-size: 0.82rem;
+            margin: 8px 0;
         }
 
         /* Force new page for each new year section */
@@ -220,8 +207,6 @@
             color: #111;
             margin-bottom: 15px;
             line-height: 1.4;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
         }
 
         /* Chunked Grid Cards */
@@ -235,8 +220,6 @@
             break-inside: avoid;
             box-sizing: border-box;
             width: 100%;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
         }
 
         .card-header {
@@ -268,7 +251,6 @@
             container-type: inline-size;
         }
 
-        /* Scalable Font for 5-Digit Numbers */
         .checkbox-item {
             aspect-ratio: 1 / 1;
             border: 1px solid #222;
@@ -284,8 +266,6 @@
             width: 100%;
             overflow: hidden;
             line-height: 1;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
         }
 
         .page-footer-note {
@@ -298,7 +278,7 @@
             padding-top: 4px;
         }
 
-        /* Print Media Styles & Margin Protection */
+        /* Print Media Styles */
         @page {
             size: A4 portrait;
             margin: 12mm;
@@ -333,10 +313,6 @@
             .page-start {
                 page-break-before: always !important;
                 break-before: page !important;
-            }
-            .guide-page {
-                page-break-after: always !important;
-                break-after: page !important;
             }
         }
     </style>
@@ -388,13 +364,11 @@
             container.innerHTML = '<strong>Assign Target Amount per Purification Item (Max: 20,000):</strong><br><br>';
 
             for (let i = 1; i <= count; i++) {
-                const labelName = `Purification ${String(i).padStart(2, '0')}`;
+                const labelName = 'Purification ' + String(i).padStart(2, '0');
                 const row = document.createElement('div');
                 row.className = 'task-input-row';
-                row.innerHTML = `
-                    <span>${labelName}</span>
-                    <input type="number" id="task-target-${i}" value="1000" min="1" max="20000" placeholder="Target Amount (Max 20,000)" style="flex: 1;">
-                `;
+                row.innerHTML = '<span>' + labelName + '</span>' +
+                    '<input type="number" id="task-target-' + i + '" value="1000" min="1" max="20000" placeholder="Target Amount (Max 20,000)" style="flex: 1;">';
                 container.appendChild(row);
             }
         }
@@ -427,15 +401,15 @@
             // 2. Target Amount Validation
             let taskProgress = {};
             for (let i = 1; i <= numTasks; i++) {
-                const targetInput = document.getElementById(`task-target-${i}`);
+                const targetInput = document.getElementById('task-target-' + i);
                 let totalTarget = parseInt(targetInput ? targetInput.value : 1000);
 
                 if (isNaN(totalTarget) || totalTarget < 1) {
-                    alert(`Purification ${String(i).padStart(2, '0')} must have a target of at least 1.`);
+                    alert('Purification ' + String(i).padStart(2, '0') + ' must have a target of at least 1.');
                     return;
                 }
                 if (totalTarget > 20000) {
-                    alert(`Purification ${String(i).padStart(2, '0')} target cannot exceed 20,000.`);
+                    alert('Purification ' + String(i).padStart(2, '0') + ' target cannot exceed 20,000.');
                     return;
                 }
 
@@ -449,76 +423,65 @@
             const totalYears = (endYear - startYear) + 1;
             printArea.innerHTML = '';
 
-            // --- INJECT PAGE 1 OF SPIRITUAL GUIDE ---
-            const guidePage1 = document.createElement('div');
-            guidePage1.className = 'guide-page';
-            guidePage1.innerHTML = `
-                <h2>🌿 A Spiritual & Psychological Guide to Sincere Repentance (Tawbah)</h2>
-                
-                <div class="quote-callout">
-                    &ldquo;Indeed, good deeds wipe out bad ones. That is a reminder for those who remember.&rdquo; &mdash; <strong>Surah Hud (11:114)</strong>
-                </div>
+            // --- INJECT PAGE 1 OF GUIDE ---
+            const introDiv = document.createElement('div');
+            introDiv.className = 'intro-page';
+            introDiv.innerHTML = 
+                '<h2>🌿 A Spiritual & Psychological Guide to Sincere Repentance (Tawbah)</h2>' +
+                '<div class="quote-callout">' +
+                '&ldquo;Indeed, good deeds wipe out bad ones. That is a reminder for those who remember.&rdquo; &mdash; <strong>Surah Hud (11:114)</strong>' +
+                '</div>' +
+                '<h3>1. What Makes Repentance "Sincere"?</h3>' +
+                '<p>Repentance is not a mere verbal recitation; it is a complete reset of the heart and direction. Classical scholars outline four essential conditions for repentance to be sincere:</p>' +
+                '<ul>' +
+                '<li><strong>Immediate Cessation (Al-Iqla\'):</strong> Stop the sin immediately and dismantle the environment around it.</li>' +
+                '<li><strong>Sincere Remorse (An-Nadam):</strong> Feel genuine grief in your heart for having transgressed against Allah. The Prophet (ﷺ) said: <em>&ldquo;Remorse is repentance.&rdquo;</em> (Sunan Ibn Majah)</li>' +
+                '<li><strong>Firm Resolve (Al-\'Azm):</strong> Make a solemn, unshakeable intention never to return to the sin.</li>' +
+                '<li><strong>Strict Boundary Setting & Trigger Removal:</strong> You must actively block the pathways and temptations that led to the sin. Because you now understand your triggers, you must close those doors permanently.</li>' +
+                '</ul>' +
+                '<p><em>(Note: If the sin violated the rights of another human being, you must also restore their rights or seek their forgiveness).</em></p>' +
+                '<h3>2. A Practical Approach: Quality Over Impractical Quantity</h3>' +
+                '<p>A common mistake when confronting past shortfalls is falling into overload—such as attempting to pray thousands of individual <em>Nafl</em> prayers for every single past mistake. This is impractical.</p>' +
+                '<p>Islam values sincere devotion over overwhelming quantity:</p>' +
+                '<ul>' +
+                '<li><strong>Salat at-Tawbah for a Lifetime:</strong> You do not need thousands of separate prayers. Praying two Rak\'ahs of <em>Salat at-Tawbah</em> with deep presence, humility, and submission can suffice for your entire past, provided you have fulfilled the conditions of sincere repentance.</li>' +
+                '<li><strong>Devotional Istighfar:</strong> While praying endless individual prayers for every past mistake is impractical, reciting <em>Istighfar</em> with deep, conscious devotion for each specific shortfall is completely achievable and highly recommended.</li>' +
+                '<li><strong>Sayyidul Istighfar & Continuous Good Deeds:</strong> Frequently recite <em>Sayyidul Istighfar</em> (the Master Supplication for Forgiveness) and follow past mistakes with positive good deeds.</li>' +
+                '</ul>';
+            printArea.appendChild(introDiv);
 
-                <h3>1. What Makes Repentance "Sincere"?</h3>
-                <p>Repentance is not a mere verbal recitation; it is a complete reset of the heart and direction. Classical scholars outline four essential conditions for repentance to be sincere:</p>
-                <ol>
-                    <li><strong>Immediate Cessation (Al-Iqla'):</strong> Stop the sin immediately and dismantle the environment around it.</li>
-                    <li><strong>Sincere Remorse (An-Nadam):</strong> Feel genuine grief in your heart for having transgressed against Allah. The Prophet ﷺ said: <em>&ldquo;Remorse is repentance.&rdquo;</em> (Sunan Ibn Majah)</li>
-                    <li><strong>Firm Resolve (Al-'Azm):</strong> Make a solemn, unshakeable intention never to return to the sin.</li>
-                    <li><strong>Strict Boundary Setting & Trigger Removal:</strong> You must actively block the pathways and temptations that led to the sin. Because you now understand your triggers, you must close those doors permanently.</li>
-                </ol>
-                <p><em>(Note: If the sin violated the rights of another human being, you must also restore their rights or seek their forgiveness).</em></p>
-
-                <h3>2. A Practical Approach: Quality Over Impractical Quantity</h3>
-                <p>A common mistake when confronting past shortfalls is falling into overload—such as attempting to pray thousands of individual Nafl prayers for every single past mistake. This is impractical.</p>
-                <p>Islam values sincere devotion over overwhelming quantity:</p>
-                <ul>
-                    <li><strong>Salat at-Tawbah for a Lifetime:</strong> You do not need thousands of separate prayers. Praying two Rak'ahs of Salat at-Tawbah with deep presence, humility, and submission can suffice for your entire past, provided you have fulfilled the conditions of sincere repentance.</li>
-                    <li><strong>Devotional Istighfar:</strong> While praying endless individual prayers for every past mistake is impractical, reciting Istighfar with deep, conscious devotion for each specific shortfall is completely achievable and highly recommended.</li>
-                    <li><strong>Sayyidul Istighfar & Continuous Good Deeds:</strong> Frequently recite Sayyidul Istighfar (the Master Supplication for Forgiveness) and follow past mistakes with positive good deeds.</li>
-                </ul>
-            `;
-            printArea.appendChild(guidePage1);
-
-            // --- INJECT PAGE 2 OF SPIRITUAL GUIDE ---
-            const guidePage2 = document.createElement('div');
-            guidePage2.className = 'guide-page';
-            guidePage2.innerHTML = `
-                <h3>3. The Psychological Trap: The Whispers of Despair (Ya's)</h3>
-                <p>When Satan fails to entice you into sin, he changes tactics: he tempts you with despair.</p>
-                <p>He whispers: <em>&ldquo;You knew better, yet you still sinned. You are a hypocrite, too dirty to be saved, and Allah will never forgive you.&rdquo;</em></p>
-
-                <h4>⚠️ A Critical Warning from Islamic Psychology</h4>
-                <p>Scholars of spiritual purification (Tazkiyah), such as Imam Al-Ghazali in Ihya 'Ulum al-Din, warn against obsessing over past numbers:</p>
-                <ul>
-                    <li><strong>Despair is a Major Sin:</strong> Feeling guilty is healthy; believing your sins are larger than Allah’s capacity to forgive is a severe theological error.</li>
-                    <li><strong>Allah's Mercy Dwarfs Any Calculation:</strong> Allah's attributes of mercy—Al-Ghafur (The All-Forgiving) and Al-Rahman (The Most Compassionate)—completely dwarf any finite number a human being can calculate.</li>
-                    <li><strong>The Core Purpose of This Tool:</strong> This tool exists to give you a tangible simulation of how your shortfalls might appear when presented before you on Maidan al-Hashr (the Day of Gathering). It is built directly upon the profound advice of Umar ibn al-Khattab (RA): <em>&ldquo;Hold yourselves accountable before you are held accountable, and weigh your deeds before they are weighed for you.&rdquo;</em> It serves as a temporary scaffolding for structured self-reckoning—never as a weight to make you feel doomed, helpless, or despairing of Allah's infinite mercy.</li>
-                </ul>
-
-                <h3>4. What To Do After Sincere Repentance</h3>
-                <p>Once you have repented sincerely, you have two choices regarding this physical tracker or PDF:</p>
-                <ul>
-                    <li><strong>Option A: Keep It as an Advisory Reminder:</strong> Keep the record private if it serves as a gentle reminder of where you came from, helping you stay humble, recognize your triggers, and ensure you never slide back.</li>
-                    <li><strong>Option B: Erase or Destroy It (Highly Recommended if Burdened):</strong> If looking at the numbers causes you mental anguish, shame, or makes you feel "doomed," destroy or erase this tracker immediately.</li>
-                </ul>
-
-                <div class="quote-callout">
-                    🛑 <strong>Remember:</strong> Feeling hopeless or dirty after sincere repentance is 100% a whisper from Satan (Waswas) designed to paralyze your worship today. Once repented, put the numbers away and move forward in Allah's mercy.
-                </div>
-
-                <h3>5. What If You Stumble Again? (Never Fall for the Trap)</h3>
-                <p>If, despite your absolute best efforts and removing all triggers, you slip and commit the sin again: Do not despair and do not wait.</p>
-                <ol>
-                    <li><strong>Immediately Pray 2 Rak'ahs of Nafl / Salat at-Tawbah:</strong> Stand before Allah immediately and seek forgiveness (Istighfar) with a sincere heart.</li>
-                    <li><strong>Beware the "I Am Hypocritical & Unworthy" Trap:</strong> If you slip again—even after crying in sincere repentance and making a firm resolve never to return—Satan will whisper: <em>&ldquo;Look at you. You repented sincerely, promised Allah you were done, and yet you broke your promise and failed again. You are just a hypocrite, and standing before Allah in prayer now is just insincere.&rdquo;</em> This is one of his most subtle traps. We must humbly admit our weakness, but we must never turn away from Allah out of shame. Broken promises do not mean you should abandon prayer; they mean you need Allah's mercy even more. The Prophet Muhammad ﷺ commanded us: <em>&ldquo;Fear Allah wherever you are, follow a bad deed with a good deed and it will erase it, and behave towards people with good character.&rdquo;</em> (Jami` at-Tirmidhi) No matter how many times you stumble after repenting, turn back immediately, pray two Rak'ahs, and seek His forgiveness again.</li>
-                </ol>
-
-                <div class="quote-callout" style="margin-top: 12px;">
-                    &ldquo;Say, 'O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.'&rdquo; &mdash; <strong>Surah Az-Zumar (39:53)</strong>
-                </div>
-            `;
-            printArea.appendChild(guidePage2);
+            // --- INJECT PAGE 2 OF GUIDE ---
+            const introDiv2 = document.createElement('div');
+            introDiv2.className = 'intro-page';
+            introDiv2.innerHTML = 
+                '<h3>3. The Psychological Trap: The Whispers of Despair (Ya\'s)</h3>' +
+                '<p>When Satan fails to entice you into sin, he changes tactics: he tempts you with despair.</p>' +
+                '<p>He whispers: <em>&ldquo;You knew better, yet you still sinned. You are a hypocrite, too dirty to be saved, and Allah will never forgive you.&rdquo;</em></p>' +
+                '<p style="margin: 6px 0 2px 0;"><strong>⚠️ A Critical Warning from Islamic Psychology</strong></p>' +
+                '<p>Scholars of spiritual purification (Tazkiyah), such as Imam Al-Ghazali in <em>Ihya \'Ulum al-Din</em>, warn against obsessing over past numbers:</p>' +
+                '<ul>' +
+                '<li><strong>Despair is a Major Sin:</strong> Feeling guilty is healthy; believing your sins are larger than Allah\'s capacity to forgive is a severe theological error.</li>' +
+                '<li><strong>Allah\'s Mercy Dwarfs Any Calculation:</strong> Allah\'s attributes of mercy—<em>Al-Ghafur</em> (The All-Forgiving) and <em>Al-Rahman</em> (The Most Compassionate)—completely dwarf any finite number a human being can calculate.</li>' +
+                '<li><strong>The Core Purpose of This Tool:</strong> This tool exists to give you a tangible simulation of how your shortfalls might appear when presented before you on <em>Maidan al-Hashr</em> (the Day of Gathering). It is built directly upon the profound advice of Umar ibn al-Khattab (RA): <em>&ldquo;Hold yourselves accountable before you are held accountable, and weigh your deeds before they are weighed for you.&rdquo;</em> It serves as a temporary scaffolding for structured self-reckoning—never as a weight to make you feel doomed, helpless, or despairing of Allah\'s infinite mercy.</li>' +
+                '</ul>' +
+                '<h3>4. What To Do After Sincere Repentance</h3>' +
+                '<p>Once you have repented sincerely, you have two choices regarding this physical tracker or PDF:</p>' +
+                '<ul>' +
+                '<li><strong>Option A: Keep It as an Advisory Reminder:</strong> Keep the record private if it serves as a gentle reminder of where you came from, helping you stay humble, recognize your triggers, and ensure you never slide back.</li>' +
+                '<li><strong>Option B: Erase or Destroy It (Highly Recommended if Burdened):</strong> If looking at the numbers causes you mental anguish, shame, or makes you feel "doomed," destroy or erase this tracker immediately.</li>' +
+                '</ul>' +
+                '<div class="quote-callout">' +
+                '🛑 <strong>Remember:</strong> Feeling hopeless or dirty after sincere repentance is 100% a whisper from Satan (Waswas) designed to paralyze your worship today. Once repented, put the numbers away and move forward in Allah\'s mercy.' +
+                '</div>' +
+                '<h3>5. What If You Stumble Again? (Never Fall for the Trap)</h3>' +
+                '<p>If, despite your absolute best efforts and removing all triggers, you slip and commit the sin again: Do not despair and do not wait.</p>' +
+                '<ul>' +
+                '<li><strong>Beware the "I Am Hypocritical & Unworthy" Trap:</strong> If you slip again—even after crying in sincere repentance and making a firm resolve never to return—Satan will whisper: <em>&ldquo;Look at you. You repented sincerely, promised Allah you were done, and yet you broke your promise and failed again. You are just a hypocrite, and standing before Allah in prayer now is just insincere.&rdquo;</em> This is one of his most subtle traps. We must humbly admit our weakness, but we must never turn away from Allah out of shame. Broken promises do not mean you should abandon prayer; they mean you need Allah\'s mercy even more. The Prophet (ﷺ) commanded us: <em>&ldquo;Fear Allah wherever you are, follow a bad deed with a good deed and it will erase it, and behave towards people with good character.&rdquo;</em> (Jami` at-Tirmidhi) No matter how many times you stumble after repenting, turn back immediately, pray two Rak\'ahs, and seek His forgiveness again.</li>' +
+                '</ul>' +
+                '<div class="quote-callout" style="margin-top: 8px;">' +
+                '&ldquo;Say, \'O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.\'&rdquo; &mdash; <strong>Surah Az-Zumar (39:53)</strong>' +
+                '</div>';
+            printArea.appendChild(introDiv2);
 
             // --- RENDER YEARLY TRACKER SHEETS ---
             const MAX_BOXES_PER_CARD = 150; 
@@ -529,22 +492,26 @@
                 const yearsLeft = totalYears - y;
 
                 const yearSection = document.createElement('div');
-                yearSection.className = 'year-container page-start';
+                yearSection.className = 'year-container';
 
-                const yearHeaderHTML = `
-                    <div class="year-section-header">
-                        <div class="year-title">Year ${currentYear}</div>
-                        <div class="umar-quote-box">
-                            &ldquo;Hold yourselves accountable before you are held accountable, and weigh your deeds before they are weighed for you. For indeed, it will be easier for your accounting tomorrow if you hold yourselves accountable today.&rdquo; &mdash; Umar ibn al-Khattab (RA)
-                        </div>
-                    </div>
-                `;
+                // Force new page for year 2, year 3, etc.
+                if (renderedYearsCount > 0) {
+                    yearSection.classList.add('page-start');
+                }
+
+                const yearHeaderHTML = 
+                    '<div class="year-section-header">' +
+                        '<div class="year-title">Year ' + currentYear + '</div>' +
+                        '<div class="umar-quote-box">' +
+                            '&ldquo;Hold yourselves accountable before you are held accountable, and weigh your deeds before they are weighed for you. For indeed, it will be easier for your accounting tomorrow if you hold yourselves accountable today.&rdquo; &mdash; Umar ibn al-Khattab (RA)' +
+                        '</div>' +
+                    '</div>';
                 yearSection.innerHTML = yearHeaderHTML;
 
                 let yearHasTasks = false;
 
                 for (let i = 1; i <= numTasks; i++) {
-                    const taskName = `Purification ${String(i).padStart(2, '0')}`;
+                    const taskName = 'Purification ' + String(i).padStart(2, '0');
                     const p = taskProgress[i];
 
                     if (p.remainingTarget <= 0) continue;
@@ -567,26 +534,24 @@
                         const card = document.createElement('div');
                         card.className = 'grid-card';
 
-                        const partLabel = totalParts > 1 ? ` [Part ${partCounter}/${totalParts}]` : '';
+                        const partLabel = totalParts > 1 ? ' [Part ' + partCounter + '/' + totalParts + ']' : '';
 
-                        const cardHeaderHTML = `
-                            <div class="card-header">
-                                <span class="card-title">${taskName}${partLabel}</span>
-                                <span class="card-meta">Year ${currentYear} | Items #${startIdx} &ndash; #${endIdx} (Chunk: ${chunkSize} / Year Target: ${actualCount})</span>
-                            </div>
-                        `;
+                        const cardHeaderHTML = 
+                            '<div class="card-header">' +
+                                '<span class="card-title">' + taskName + partLabel + '</span>' +
+                                '<span class="card-meta">Year ' + currentYear + ' | Items #' + startIdx + ' &ndash; #' + endIdx + ' (Chunk: ' + chunkSize + ' / Year Target: ' + actualCount + ')</span>' +
+                            '</div>';
 
                         let gridHTML = '<div class="checkbox-grid">';
                         for (let c = 0; c < chunkSize; c++) {
-                            gridHTML += `<div class="checkbox-item">${startIdx + c}</div>`;
+                            gridHTML += '<div class="checkbox-item">' + (startIdx + c) + '</div>';
                         }
                         gridHTML += '</div>';
 
-                        const footerHTML = `
-                            <div class="page-footer-note">
-                                &ldquo;Indeed, good deeds wipe out bad ones.&rdquo; &mdash; Surah Hud 11:114
-                            </div>
-                        `;
+                        const footerHTML = 
+                            '<div class="page-footer-note">' +
+                                '&ldquo;Indeed, good deeds wipe out bad ones.&rdquo; &mdash; Surah Hud 11:114' +
+                            '</div>';
 
                         card.innerHTML = cardHeaderHTML + gridHTML + footerHTML;
                         yearSection.appendChild(card);
