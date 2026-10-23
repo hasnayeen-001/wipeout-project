@@ -356,7 +356,8 @@
 
         <div class="form-group">
             <label for="num-tasks">Number of Items / Sins to Purify (1 – 20):</label>
-            <input type="number" id="num-tasks" value="3" min="1" max="20" onchange="generateTaskInputs()">
+            <!-- FIXED: Changed onchange to oninput so spinner arrows instantly generate input rows -->
+            <input type="number" id="num-tasks" value="3" min="1" max="20" oninput="generateTaskInputs()">
         </div>
 
         <div id="task-inputs-container"></div>
@@ -378,7 +379,6 @@
             let count = parseInt(document.getElementById('num-tasks').value) || 1;
             if (count < 1) count = 1;
             if (count > 20) count = 20;
-            document.getElementById('num-tasks').value = count;
 
             const container = document.getElementById('task-inputs-container');
             container.innerHTML = '<strong>Assign Target Amount per Purification Item (Max: 20,000):</strong><br><br>';
