@@ -17,7 +17,7 @@
             color: var(--text-color);
             margin: 0;
             padding: 20px;
-            line-height: 1.4;
+            line-height: 1.5;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
@@ -125,12 +125,67 @@
             min-width: 120px;
         }
 
-        /* Printable Container with Safe Margins */
+        /* Printable Container */
         .print-container {
             width: 100%;
             max-width: 190mm;
             margin: 0 auto;
             box-sizing: border-box;
+        }
+
+        /* Intro Guide Page Formatting */
+        .intro-page {
+            page-break-after: always;
+            break-after: page;
+            padding: 10px 0;
+        }
+
+        .intro-page h2 {
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 4px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .intro-page h3 {
+            font-size: 1rem;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        .intro-page p, .intro-page li {
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+            text-align: justify;
+        }
+
+        .intro-page ul {
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+
+        .warning-box {
+            border: 2px solid #111;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #fdfdfd;
+        }
+
+        .warning-box h2 {
+            margin-top: 0;
+            text-align: center;
+            border-bottom: 1px solid #111;
+        }
+
+        .quote-callout {
+            background-color: #f4f4f4;
+            border-left: 4px solid #111;
+            padding: 8px 12px;
+            font-style: italic;
+            font-size: 0.85rem;
+            margin: 10px 0;
         }
 
         /* Force new page for each new year section */
@@ -164,8 +219,6 @@
             color: #111;
             margin-bottom: 15px;
             line-height: 1.4;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
         }
 
         /* Chunked Grid Cards */
@@ -179,8 +232,6 @@
             break-inside: avoid;
             box-sizing: border-box;
             width: 100%;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
         }
 
         .card-header {
@@ -212,7 +263,6 @@
             container-type: inline-size;
         }
 
-        /* Scalable Font for 5-Digit Numbers */
         .checkbox-item {
             aspect-ratio: 1 / 1;
             border: 1px solid #222;
@@ -228,8 +278,6 @@
             width: 100%;
             overflow: hidden;
             line-height: 1;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
         }
 
         .page-footer-note {
@@ -242,7 +290,7 @@
             padding-top: 4px;
         }
 
-        /* Print Media Styles & Margin Protection */
+        /* Print Media Styles */
         @page {
             size: A4 portrait;
             margin: 12mm;
@@ -266,9 +314,12 @@
                 border: 1px solid #000 !important;
                 margin-bottom: 12px;
             }
-            .umar-quote-box {
+            .umar-quote-box, .quote-callout {
                 background-color: #f4f4f4 !important;
                 border-left: 4px solid #000 !important;
+            }
+            .warning-box {
+                border: 2px solid #000 !important;
             }
             .checkbox-item {
                 border-color: #000 !important;
@@ -389,6 +440,72 @@
             const totalYears = (endYear - startYear) + 1;
             printArea.innerHTML = '';
 
+            // --- INJECT INTRODUCTORY GUIDE PAGES (Page 1 & 2) ---
+            const introDiv = document.createElement('div');
+            introDiv.className = 'intro-page';
+            introDiv.innerHTML = `
+                <div class="warning-box">
+                    <h2>🔒 PRIVATE & CONFIDENTIAL</h2>
+                    <p><strong>PERSONAL MUHASABAH & ACCOUNTABILITY DOCUMENT</strong></p>
+                    <p style="font-size: 0.82rem;"><em>This document contains private personal accounting intended strictly for self-reflection by the owner.</em></p>
+                    <div class="quote-callout">
+                        &ldquo;O you who have believed, avoid much suspicion... and do not spy on one another.&rdquo; &mdash; <strong>Surah Al-Hujurat (49:12)</strong>
+                    </div>
+                    <p>🛑 <strong>Please do not open or read.</strong> If found, kindly return to the owner without inspecting.</p>
+                    <div class="quote-callout" style="margin-top: 10px;">
+                        &ldquo;Whoever conceals [the faults of] a Muslim, Allah will conceal him in this world and the Hereafter.&rdquo; &mdash; <strong>Sahih Muslim</strong>
+                    </div>
+                </div>
+
+                <h2>🌿 Guide to Sincere Repentance (Tawbah)</h2>
+                <div class="quote-callout">
+                    &ldquo;Indeed, good deeds wipe out bad ones. That is a reminder for those who remember.&rdquo; &mdash; <strong>Surah Hud (11:114)</strong>
+                </div>
+
+                <h3>1. Conditions of Sincere Repentance</h3>
+                <p>Repentance (<em>Tawbah an-Nusuh</em>) is a complete reset of the heart. Classical scholars outline essential pillars:</p>
+                <ul>
+                    <li><strong>Immediate Cessation:</strong> Stop the sin immediately and dismantle its environment.</li>
+                    <li><strong>Sincere Remorse:</strong> Feel genuine grief in your heart. The Prophet &ﷺ; said: <em>&ldquo;Remorse is repentance.&rdquo;</em> (Ibn Majah)</li>
+                    <li><strong>Firm Resolve:</strong> Make an unshakeable intention never to return to it.</li>
+                    <li><strong>Trigger Removal:</strong> Actively close the pathways and doors that led to the shortfall.</li>
+                </ul>
+
+                <h3>2. Quality Over Impractical Quantity</h3>
+                <p>Attempting thousands of individual <em>Nafl</em> prayers for every past mistake is unsustainable. Instead:</p>
+                <ul>
+                    <li><strong>Salat at-Tawbah:</strong> Praying two Rak'ahs of <em>Salat at-Tawbah</em> with deep submission can suffice for your entire past once conditions are met.</li>
+                    <li><strong>Devotional Istighfar:</strong> Recite <em>Istighfar</em> and <em>Sayyidul Istighfar</em> with deep conscious devotion, followed immediately by good deeds (Sadaqah, fasting, Quran).</li>
+                </ul>
+            `;
+            printArea.appendChild(introDiv);
+
+            const introDiv2 = document.createElement('div');
+            introDiv2.className = 'intro-page';
+            introDiv2.innerHTML = `
+                <h3>3. The Core Purpose & The Trap of Despair</h3>
+                <p><strong>The Core Purpose:</strong> This tool gives you a tangible simulation of how your shortfalls might appear when presented before you on <em>Maidan al-Hashr</em> (Day of Gathering). It fulfills Umar ibn al-Khattab's (RA) advice: <em>&ldquo;Hold yourselves accountable before you are held accountable...&rdquo;</em> It is temporary scaffolding&mdash;never a weight to make you feel doomed.</p>
+                <p><strong>The Whispers of Despair (Waswas):</strong> When Satan fails to tempt you into sin, he tempts you with despair, whispering that you are too dirty to be saved. Remember that Allah's mercy (<em>Al-Ghafur</em>, <em>Al-Rahman</em>) completely dwarfs any calculation.</p>
+
+                <h3>4. What To Do After Repentance</h3>
+                <ul>
+                    <li><strong>Keep It:</strong> Use it as a private reminder to recognize your triggers and stay humble.</li>
+                    <li><strong>Destroy It:</strong> If looking at numbers causes you mental anguish or makes you feel doomed, erase or destroy this tracker immediately. Feeling hopeless after sincere repentance is a trick of Satan.</li>
+                </ul>
+
+                <h3>5. What If You Stumble Again?</h3>
+                <p>If you slip again despite your best efforts, do not despair:</p>
+                <ul>
+                    <li><strong>Beware the "Unworthy" Lie:</strong> Satan will whisper that breaking your promise makes you a hypocrite unworthy of prayer. This is his ultimate trap. Broken promises mean you need Allah's mercy <em>more</em>, not less.</li>
+                    <li><strong>Turn Back Immediately:</strong> Stand before Allah, pray two Rak'ahs, and seek forgiveness. The Prophet &ﷺ; commanded us to follow a bad deed immediately with a good one to erase it.</li>
+                </ul>
+                <div class="quote-callout" style="margin-top: 15px;">
+                    &ldquo;Say, 'O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allah. Indeed, Allah forgives all sins...'&rdquo; &mdash; <strong>Surah Az-Zumar (39:53)</strong>
+                </div>
+            `;
+            printArea.appendChild(introDiv2);
+
+            // --- RENDER YEARLY TRACKER SHEETS ---
             const MAX_BOXES_PER_CARD = 150; 
             let renderedYearsCount = 0;
 
@@ -397,12 +514,7 @@
                 const yearsLeft = totalYears - y;
 
                 const yearSection = document.createElement('div');
-                yearSection.className = 'year-container';
-
-                // Force new page for year 2, year 3, etc.
-                if (renderedYearsCount > 0) {
-                    yearSection.classList.add('page-start');
-                }
+                yearSection.className = 'year-container page-start';
 
                 const yearHeaderHTML = `
                     <div class="year-section-header">
