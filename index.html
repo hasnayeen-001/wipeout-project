@@ -17,7 +17,7 @@
             color: var(--text-color);
             margin: 0;
             padding: 20px;
-            line-height: 1.5;
+            line-height: 1.45;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
@@ -133,15 +133,15 @@
             box-sizing: border-box;
         }
 
-        /* Intro Guide Page Formatting */
-        .intro-page {
-            page-break-after: always;
-            break-after: page;
-            padding: 10px 0;
+        /* 2-Page Guide Styles */
+        .guide-page {
+            box-sizing: border-box;
+            padding: 5px 0;
+            min-height: 250mm;
         }
 
-        .intro-page h2 {
-            font-size: 1.3rem;
+        .guide-page h2 {
+            font-size: 1.25rem;
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 4px;
             margin-top: 0;
@@ -149,20 +149,30 @@
             text-transform: uppercase;
         }
 
-        .intro-page h3 {
-            font-size: 1rem;
-            margin-top: 15px;
-            margin-bottom: 5px;
+        .guide-page h3 {
+            font-size: 0.95rem;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            font-weight: 700;
         }
 
-        .intro-page p, .intro-page li {
+        .guide-page h4 {
             font-size: 0.88rem;
-            margin-bottom: 8px;
-            text-align: justify;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            font-weight: 700;
         }
 
-        .intro-page ul {
-            margin-top: 5px;
+        .guide-page p, .guide-page li {
+            font-size: 0.84rem;
+            margin-bottom: 6px;
+            text-align: justify;
+            line-height: 1.4;
+        }
+
+        .guide-page ul, .guide-page ol {
+            margin-top: 4px;
+            margin-bottom: 8px;
             padding-left: 20px;
         }
 
@@ -171,8 +181,30 @@
             border-left: 4px solid #111;
             padding: 8px 12px;
             font-style: italic;
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             margin: 10px 0;
+        }
+
+        .warning-callout {
+            background-color: #fff8e6;
+            border-left: 4px solid #d97706;
+            padding: 8px 12px;
+            font-size: 0.83rem;
+            margin: 10px 0;
+        }
+
+        .stop-callout {
+            background-color: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 8px 12px;
+            font-size: 0.83rem;
+            margin: 10px 0;
+        }
+
+        /* Force page breaks */
+        .page-break {
+            page-break-after: always;
+            break-after: page;
         }
 
         /* Force new page for each new year section */
@@ -301,13 +333,17 @@
                 border: 1px solid #000 !important;
                 margin-bottom: 12px;
             }
-            .umar-quote-box, .quote-callout {
+            .umar-quote-box, .quote-callout, .warning-callout, .stop-callout {
                 background-color: #f4f4f4 !important;
                 border-left: 4px solid #000 !important;
             }
             .checkbox-item {
                 border-color: #000 !important;
                 color: #000 !important;
+            }
+            .page-break {
+                page-break-after: always !important;
+                break-after: page !important;
             }
             .page-start {
                 page-break-before: always !important;
@@ -424,57 +460,80 @@
             const totalYears = (endYear - startYear) + 1;
             printArea.innerHTML = '';
 
-            // --- INJECT INTRODUCTORY GUIDE PAGES (Page 1 & 2) ---
-            const introDiv = document.createElement('div');
-            introDiv.className = 'intro-page';
-            introDiv.innerHTML = `
-                <h2>🌿 A Guide to Sincere Repentance (Tawbah)</h2>
+            // --- PAGE 1 OF THE GUIDE ---
+            const guidePage1 = document.createElement('div');
+            guidePage1.className = 'guide-page page-break';
+            guidePage1.innerHTML = `
+                <h2>🌿 A Spiritual & Psychological Guide to Sincere Repentance (Tawbah)</h2>
+                
                 <div class="quote-callout">
-                    &ldquo;Indeed, good deeds wipe out bad ones. That is a reminder for those who remember.&rdquo; &mdash; <strong>Surah Hud (11:114)</strong>
+                    &ldquo;Indeed, good deeds wipe out bad ones. That is a reminder for those who remember.&rdquo;<br>
+                    &mdash; <strong>Surah Hud (11:114)</strong>
                 </div>
 
-                <h3>1. What Makes Repentance "Sincere"? (Tawbah an-Nusuh)</h3>
-                <p>Repentance is a complete reset of the heart. Classical scholars outline essential pillars:</p>
-                <ul>
-                    <li><strong>Immediate Cessation:</strong> Stop the sin immediately and dismantle its surrounding environment.</li>
-                    <li><strong>Sincere Remorse:</strong> Feel genuine grief in your heart. The Prophet ﷺ said: <em>&ldquo;Remorse is repentance.&rdquo;</em> (Ibn Majah)</li>
-                    <li><strong>Firm Resolve:</strong> Make an unshakeable intention never to return to it.</li>
-                    <li><strong>Trigger Removal:</strong> Actively close the pathways and doors that led to the shortfall.</li>
-                </ul>
+                <h3>1. What Makes Repentance "Sincere"?</h3>
+                <p>Repentance is not a mere verbal recitation; it is a complete reset of the heart and direction. Classical scholars outline four essential conditions for repentance to be sincere:</p>
+                <ol>
+                    <li><strong>Immediate Cessation (Al-Iqla'):</strong> Stop the sin immediately and dismantle the environment around it.</li>
+                    <li><strong>Sincere Remorse (An-Nadam):</strong> Feel genuine grief in your heart for having transgressed against Allah. The Prophet ﷺ said: <em>&ldquo;Remorse is repentance.&rdquo;</em> (Sunan Ibn Majah)</li>
+                    <li><strong>Firm Resolve (Al-'Azm):</strong> Make a solemn, unshakeable intention never to return to the sin.</li>
+                    <li><strong>Strict Boundary Setting & Trigger Removal:</strong> You must actively block the pathways and temptations that led to the sin. Because you now understand your triggers, you must close those doors permanently.</li>
+                </ol>
+                <p><em>(Note: If the sin violated the rights of another human being, you must also restore their rights or seek their forgiveness).</em></p>
 
-                <h3>2. Quality Over Impractical Quantity</h3>
-                <p>Attempting thousands of individual <em>Nafl</em> prayers for every past mistake is unsustainable. Instead:</p>
+                <h3>2. A Practical Approach: Quality Over Impractical Quantity</h3>
+                <p>A common mistake when confronting past shortfalls is falling into overload&mdash;such as attempting to pray thousands of individual Nafl prayers for every single past mistake. This is impractical.</p>
+                <p>Islam values sincere devotion over overwhelming quantity:</p>
                 <ul>
-                    <li><strong>Salat at-Tawbah:</strong> Praying two Rak'ahs of <em>Salat at-Tawbah</em> with deep submission can suffice for your entire past once conditions are met.</li>
-                    <li><strong>Devotional Istighfar:</strong> Recite <em>Istighfar</em> and <em>Sayyidul Istighfar</em> with deep conscious devotion, followed immediately by good deeds (Sadaqah, fasting, Quran).</li>
+                    <li><strong>Salat at-Tawbah for a Lifetime:</strong> You do not need thousands of separate prayers. Praying two Rak'ahs of Salat at-Tawbah with deep presence, humility, and submission can suffice for your entire past, provided you have fulfilled the conditions of sincere repentance.</li>
+                    <li><strong>Devotional Istighfar:</strong> While praying endless individual prayers for every past mistake is impractical, reciting Istighfar with deep, conscious devotion for each specific shortfall is completely achievable and highly recommended.</li>
+                    <li><strong>Sayyidul Istighfar & Continuous Good Deeds:</strong> Frequently recite Sayyidul Istighfar (the Master Supplication for Forgiveness) and follow past mistakes with positive good deeds.</li>
                 </ul>
             `;
-            printArea.appendChild(introDiv);
+            printArea.appendChild(guidePage1);
 
-            const introDiv2 = document.createElement('div');
-            introDiv2.className = 'intro-page';
-            introDiv2.innerHTML = `
-                <h3>3. The Core Purpose & The Trap of Despair</h3>
-                <p><strong>The Core Purpose:</strong> This tool gives you a tangible simulation of how your shortfalls might appear when presented before you on <em>Maidan al-Hashr</em> (Day of Gathering). It fulfills Umar ibn al-Khattab's (RA) advice: <em>&ldquo;Hold yourselves accountable before you are held accountable...&rdquo;</em> It is temporary scaffolding&mdash;never a weight to make you feel doomed.</p>
-                <p><strong>The Whispers of Despair (Waswas):</strong> When Satan fails to tempt you into sin, he tempts you with despair, whispering that you are too dirty to be saved. Remember that Allah's mercy (<em>Al-Ghafur</em>, <em>Al-Rahman</em>) completely dwarfs any calculation.</p>
+            // --- PAGE 2 OF THE GUIDE ---
+            const guidePage2 = document.createElement('div');
+            guidePage2.className = 'guide-page page-break';
+            guidePage2.innerHTML = `
+                <h3>3. The Psychological Trap: The Whispers of Despair (Ya's)</h3>
+                <p>When Satan fails to entice you into sin, he changes tactics: he tempts you with despair.</p>
+                <p>He whispers: <em>&ldquo;You knew better, yet you still sinned. You are a hypocrite, too dirty to be saved, and Allah will never forgive you.&rdquo;</em></p>
 
-                <h3>4. What To Do After Repentance</h3>
+                <div class="warning-callout">
+                    <strong>⚠️ A Critical Warning from Islamic Psychology</strong><br>
+                    Scholars of spiritual purification (Tazkiyah), such as Imam Al-Ghazali in <em>Ihya 'Ulum al-Din</em>, warn against obsessing over past numbers:
+                    <ul>
+                        <li><strong>Despair is a Major Sin:</strong> Feeling guilty is healthy; believing your sins are larger than Allah’s capacity to forgive is a severe theological error.</li>
+                        <li><strong>Allah's Mercy Dwarfs Any Calculation:</strong> Allah's attributes of mercy&mdash;Al-Ghafur (The All-Forgiving) and Al-Rahman (The Most Compassionate)&mdash;completely dwarf any finite number a human being can calculate.</li>
+                        <li><strong>The Core Purpose of This Tool:</strong> This tool exists to give you a tangible simulation of how your shortfalls might appear when presented before you on Maidan al-Hashr (the Day of Gathering). It is built directly upon the profound advice of Umar ibn al-Khattab (RA): <em>&ldquo;Hold yourselves accountable before you are held accountable, and weigh your deeds before they are weighed for you.&rdquo;</em> It serves as a temporary scaffolding for structured self-reckoning&mdash;never as a weight to make you feel doomed, helpless, or despairing of Allah's infinite mercy.</li>
+                    </ul>
+                </div>
+
+                <h3>4. What To Do After Sincere Repentance</h3>
+                <p>Once you have repented sincerely, you have two choices regarding this physical tracker or PDF:</p>
                 <ul>
-                    <li><strong>Keep It:</strong> Use it as a private reminder to recognize your triggers and stay humble.</li>
-                    <li><strong>Destroy It:</strong> If looking at numbers causes you mental anguish or makes you feel doomed, erase or destroy this tracker immediately. Feeling hopeless after sincere repentance is a trick of Satan.</li>
+                    <li><strong>Option A: Keep It as an Advisory Reminder:</strong> Keep the record private if it serves as a gentle reminder of where you came from, helping you stay humble, recognize your triggers, and ensure you never slide back.</li>
+                    <li><strong>Option B: Erase or Destroy It (Highly Recommended if Burdened):</strong> If looking at the numbers causes you mental anguish, shame, or makes you feel "doomed," destroy or erase this tracker immediately.</li>
                 </ul>
 
-                <h3>5. What If You Stumble Again?</h3>
-                <p>If you slip again despite your best efforts, do not despair:</p>
-                <ul>
-                    <li><strong>Beware the "Unworthy" Lie:</strong> Satan will whisper that breaking your promise makes you a hypocrite unworthy of prayer. This is his ultimate trap. Broken promises mean you need Allah's mercy <em>more</em>, not less.</li>
-                    <li><strong>Turn Back Immediately:</strong> Stand before Allah, pray two Rak'ahs, and seek forgiveness. The Prophet ﷺ commanded us to follow a bad deed immediately with a good one to erase it.</li>
-                </ul>
-                <div class="quote-callout" style="margin-top: 15px;">
-                    &ldquo;Say, 'O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allah. Indeed, Allah forgives all sins...'&rdquo; &mdash; <strong>Surah Az-Zumar (39:53)</strong>
+                <div class="stop-callout">
+                    🛑 <strong>Remember:</strong> Feeling hopeless or dirty after sincere repentance is 100% a whisper from Satan (Waswas) designed to paralyze your worship today. Once repented, put the numbers away and move forward in Allah's mercy.
+                </div>
+
+                <h3>5. What If You Stumble Again? (Never Fall for the Trap)</h3>
+                <p>If, despite your absolute best efforts and removing all triggers, you slip and commit the sin again: Do not despair and do not wait.</p>
+                <ol>
+                    <li><strong>Immediately Pray 2 Rak'ahs of Nafl / Salat at-Tawbah:</strong> Stand before Allah immediately and seek forgiveness (Istighfar) with a sincere heart.</li>
+                    <li><strong>Beware the "I Am Hypocritical & Unworthy" Trap:</strong> If you slip again&mdash;even after crying in sincere repentance and making a firm resolve never to return&mdash;Satan will whisper: <em>&ldquo;Look at you. You repented sincerely, promised Allah you were done, and yet you broke your promise and failed again. You are just a hypocrite, and standing before Allah in prayer now is just insincere.&rdquo;</em> This is one of his most subtle traps. We must humbly admit our weakness, but we must never turn away from Allah out of shame. Broken promises do not mean you should abandon prayer; they mean you need Allah's mercy even more. The Prophet Muhammad ﷺ commanded us: <em>&ldquo;Fear Allah wherever you are, follow a bad deed with a good deed and it will erase it, and behave towards people with good character.&rdquo;</em> (Jami` at-Tirmidhi) No matter how many times you stumble after repenting, turn back immediately, pray two Rak'ahs, and seek His forgiveness again.</li>
+                </ol>
+
+                <div class="quote-callout" style="margin-top: 12px;">
+                    &ldquo;Say, 'O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.'&rdquo;<br>
+                    &mdash; <strong>Surah Az-Zumar (39:53)</strong>
                 </div>
             `;
-            printArea.appendChild(introDiv2);
+            printArea.appendChild(guidePage2);
 
             // --- RENDER YEARLY TRACKER SHEETS ---
             const MAX_BOXES_PER_CARD = 150; 
