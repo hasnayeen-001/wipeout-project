@@ -74,3 +74,6 @@ Counting shortfalls should never lead to despair in Allah's mercy. The purpose o
 ## 🤲 Du'a & Acknowledgments
 
 May Allah (SWT) accept your good deeds, purify your heart, and grant us all success on the Day when our deeds are weighed.
+
+
+My other project (Qaza Tracker): https://github.com/hasnayeen-001/qaza-tracker
